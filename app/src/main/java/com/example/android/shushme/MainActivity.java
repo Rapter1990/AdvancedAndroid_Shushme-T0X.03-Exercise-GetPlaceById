@@ -115,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements
         while (data.moveToNext()) {
             guids.add(data.getString(data.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_PLACE_ID)));
         }
-
-        //TODO (8) Set the getPlaceById callBack so that onResult calls the Adapter's swapPlaces with the result
         PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(mClient,
                 guids.toArray(new String[guids.size()]));
         placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
@@ -129,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 
-
     //TODO (2) call refreshPlacesData in GoogleApiClient's onConnected and in the Add New Place button click event
+
     /***
      * Called when the Google API Client is successfully connected
      *
@@ -162,11 +160,7 @@ public class MainActivity extends AppCompatActivity implements
         Log.e(TAG, "API Client Connection Failed!");
     }
 
-    /***
-     * Button Click event handler to handle clicking the "Add new location" Button
-     *
-     * @param view
-     */
+
     public void onAddPlaceButtonClicked(View view) {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
